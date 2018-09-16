@@ -1,39 +1,51 @@
 package com.company;
 
 public class Grid {
+    static String columns = "ABCDEFGHIJKLM";
+    static String[] cellContents = new String[168];
 
-    private static void printGridLine(int numOfColumns) {
-        for (int i=0; i<numOfColumns; i++) {
-            System.out.print("-----------");
-        }
-        System.out.println("-");
-    }
     private static void printLetterCell() {
-        String letters = "ABCDEFGHIJKLM";
         System.out.print("|          ");
-        for (int i=0; i<letters.length(); i++) {
-            System.out.print("|    " + letters.charAt(i) + "     ");
+        for (int i=0; i<columns.length(); i++) {
+            System.out.print("|    " + columns.charAt(i) + "     ");
         }
         System.out.println("|");
     }
     private static void printNumberCell(int rowValue) {
-        String numCell = rowValue/2 < 10 ? "    |" : "   |";
-        System.out.print("||   " + rowValue/2 + numCell);
+        String singleOrDoubleDigit = rowValue/2 < 10 ? " " : "";
+        System.out.print("||   " + rowValue/2 + singleOrDoubleDigit + "   |");
     }
 
-    public static void printGrid(int columns, int rows) {
-        for (int i=0; i<rows*2+3; i++) {
+    private static void printGridLine() {
+        for (int i=0; i<columns.length()+1; i++) {
+            System.out.print("-----------");
+        }
+        System.out.println("-");
+    }
+
+    protected static void printGrid() {
+        int cellIndex = 0;
+        for (int i=0; i<25; i++) {
             if(i%2 == 0) {
-                printGridLine(columns);
+                printGridLine();
             }
             else if(i == 1){
                 printLetterCell();
             }
             else {
                 printNumberCell(i);
-                Cell.printCell();
+                for (int j=0; j<13; j++) {
+                    Cell.printCell(cellContents[cellIndex]);
+                    cellIndex++;
+                }
+                System.out.println("|");
             }
         }
+    }
+
+    protected static void clearGrid() {
+        String[] newCellContents = new String[168];
+        cellContents = newCellContents;
     }
 
 }

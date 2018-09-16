@@ -4,8 +4,6 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        int numberOfColumns = 14;
-        int numberOfRows = 12;
 
         boolean running = true;
         while(running) {
@@ -15,16 +13,26 @@ public class Main {
 
             switch (command) {
                 case "print":
-                    Grid.printGrid(numberOfColumns, numberOfRows);
+                    Grid.printGrid();
                     break;
-                case "display":
+                case "display value":
                     System.out.println("Which cell?");
+                    String displayedCell = myScanner.nextLine();
+                    Cell.showCell(displayedCell);
                     break;
                 case "set value":
                     System.out.println("What value?");
+                    String newValue = myScanner.nextLine();
+                    Cell.setCell(newValue);
                     break;
-                case "clear":
+                case "clear value":
                     System.out.println("Which cell?");
+                    String clearedCell = myScanner.nextLine();
+                    Cell.clearCell(clearedCell);
+                    break;
+                case "clear spreadsheet":
+                    Grid.clearGrid();
+                    System.out.println("Spreadsheet cleared.");
                     break;
                 case "sort":
                     System.out.println("Ascending or descending?");
