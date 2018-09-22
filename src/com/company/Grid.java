@@ -1,9 +1,16 @@
 package com.company;
 
-public class Grid {
-    static String columns = "ABCDEFGHIJKLM";
-    static String[] cellContents = new String[168];
+/**
+ Grid is a class to encapsulate rows and columns of a spreadsheet
+ */
 
+public class Grid {
+    static String columns = "ABCDEFGHIJKLM"; // column label from A to M
+    static String[] cellContents = new String[168]; // string array to hold cell contents of a 13x13 grid
+    // consider a 2-dimension array
+    /**
+     method to print the column header
+     */
     private static void printLetterCell() {
         System.out.print("|          ");
         for (int i=0; i<columns.length(); i++) {
@@ -11,11 +18,19 @@ public class Grid {
         }
         System.out.println("|");
     }
+
+    /**
+     method to print row number
+     * @param rowValue
+     */
     private static void printNumberCell(int rowValue) {
         String singleOrDoubleDigit = rowValue/2 < 10 ? " " : "";
         System.out.print("||   " + rowValue/2 + singleOrDoubleDigit + "   |");
     }
 
+    /**
+     method to print a grid line
+     */
     private static void printGridLine() {
         for (int i=0; i<columns.length()+1; i++) {
             System.out.print("-----------");
@@ -23,6 +38,9 @@ public class Grid {
         System.out.println("-");
     }
 
+    /**
+     method to print the entire spreadsheet
+     */
     protected static void printGrid() {
         int cellIndex = 0;
         for (int i=0; i<25; i++) {
@@ -34,7 +52,7 @@ public class Grid {
             }
             else {
                 printNumberCell(i);
-                for (int j=0; j<13; j++) {
+                for (int j=0; j<columns.length(); j++) {
                     Cell.printCell(cellContents[cellIndex]);
                     cellIndex++;
                 }
@@ -43,6 +61,9 @@ public class Grid {
         }
     }
 
+    /**
+     method to clear the entire spreadsheet
+     */
     protected static void clearGrid() {
         String[] newCellContents = new String[168];
         cellContents = newCellContents;
