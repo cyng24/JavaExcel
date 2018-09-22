@@ -5,9 +5,11 @@ package com.company;
  */
 
 public class Grid {
-    static String columns = "ABCDEFGHIJKLM"; // column label from A to M
-    static String[] cellContents = new String[168]; // string array to hold cell contents of a 13x13 grid
-    // consider a 2-dimension array
+    static String columns = "ABCDEFGHIJKLM"; // 13 columns in the spreadsheet labeled from A to M
+    static int numOfRows = 16; // 11 rows in the spreadsheet
+    static String[] cellContents = new String[columns.length()*numOfRows]; // string array to hold cell contents of a 13x11 grid
+    // TODO consider a 2-dimension array
+
     /**
      method to print the column header
      */
@@ -21,11 +23,11 @@ public class Grid {
 
     /**
      method to print row number
-     * @param rowValue
+     * @param rowIndex
      */
-    private static void printNumberCell(int rowValue) {
-        String singleOrDoubleDigit = rowValue/2 < 10 ? " " : "";
-        System.out.print("||   " + rowValue/2 + singleOrDoubleDigit + "   |");
+    private static void printNumberCell(int rowIndex) {
+        String singleOrDoubleDigit = rowIndex/2 < 10 ? " " : "";
+        System.out.print("||   " + rowIndex/2 + singleOrDoubleDigit + "   |");
     }
 
     /**
@@ -43,7 +45,7 @@ public class Grid {
      */
     protected static void printGrid() {
         int cellIndex = 0;
-        for (int i=0; i<25; i++) {
+        for (int i=0; i<numOfRows*2+3; i++) {
             if(i%2 == 0) {
                 printGridLine();
             }
@@ -65,7 +67,7 @@ public class Grid {
      method to clear the entire spreadsheet
      */
     protected static void clearGrid() {
-        String[] newCellContents = new String[168];
+        String[] newCellContents = new String[columns.length()*numOfRows];
         cellContents = newCellContents;
     }
 
